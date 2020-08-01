@@ -7,9 +7,6 @@
         <input matInput placeholder="Search..." [formControl]="searchControl"/>
       </mat-form-field>
     </mat-card-content>
-    <p>
-      Value: {{ searchControl.value }}
-    </p>
     <mat-card-actions>
       <div class="flex-spacer"></div>
       <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="searchControl.invalid">

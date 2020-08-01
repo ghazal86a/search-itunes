@@ -7,7 +7,7 @@ import { SearchService } from 'src/app/shared/services/search.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit{
   /**
    * Form group for search field
    */
@@ -21,13 +21,6 @@ export class SearchComponent {
   }
 
   onSubmit() {
-    // this.search.searchTerm().subscribe((response: Response) => {
-    // this.result = response;
-    // console.log('after http', this.result)
-    // console.log('seachterm from form: ', this.searchControl)
     this.term = this.searchControl.value;
-    console.log("term in search component", this.term);
-    
-    };
-  
+    }
 }
