@@ -2,12 +2,26 @@
     margin-right: 10px;
     border-radius: 5px;
   }
+
+  mat-grid-tile {
+   border-bottom: 1px solid lightgray;
+   font-size: 0.8em;
+  }
+
   .header{
     background: rgb(203, 219, 243);
     color: gray;
-    border-radius: 3px;
+    border: none
   }
   
-  mat-grid-tile {
-   border-bottom: 1px solid lightgray;
+
+ .mat-tab-label {
+   border-right:1px solid lightgray;
+   border-radius: 3px;
+    
+  }
+
+  .mat-tab-label-active {
+    background: #3f51b5;
+    color: white;
   }

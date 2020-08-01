@@ -12,10 +12,10 @@
             <div *ngFor="let item of result">
                 <mat-grid-list cols="12" rowHeight="110px"> 
                     <mat-grid-tile colspan="1"><img class="artwork" [src]="item.artworkUrl100" /></mat-grid-tile>
-                    <mat-grid-tile colspan="3">{{ item.trackName }}</mat-grid-tile>
+                    <mat-grid-tile colspan="3">{{ item.trackName  || item.collectionName }}</mat-grid-tile>
                     <mat-grid-tile colspan="3">{{ item.collectionName }}</mat-grid-tile>
                     <mat-grid-tile colspan="4">{{ item.artistName }}</mat-grid-tile>
-                    <mat-grid-tile colspan="1">{{ item.trackPrice | currency }}</mat-grid-tile>
+                    <mat-grid-tile colspan="1">{{ (item.trackPrice | currency) || (item.collectionPrice | currency) }}</mat-grid-tile>
                 </mat-grid-list>
             </div>
         </ng-template>

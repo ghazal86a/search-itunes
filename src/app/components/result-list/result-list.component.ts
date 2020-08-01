@@ -13,7 +13,7 @@ export class ResultListComponent implements OnChanges {
   @Input() term;
   result;
   songs;
-  kinds = ['Song', 'Music Video', 'Movie', 'TV Show', 'Podcast']
+  kinds = ['Song', 'Album', 'Music Video', 'Movie', 'TV Show', 'Podcast']
   selectedIndex;
   constructor(private search: SearchService) { }
 
@@ -28,10 +28,10 @@ export class ResultListComponent implements OnChanges {
     this.selectedIndex = 0;
   }
 
-  getDataforMedia(media) {
+  getDataforMedia(media, entity = '') {
     const config = new HttpRequest(
       'GET',
-      `https://itunes.apple.com/search?term=${this.term}&media=${media}&limit=50`,
+      `https://itunes.apple.com/search?term=${this.term}&media=${media}&entity=${entity}&limit=50`,
       { responseType: 'json' }
     );
     if (this.term) {
@@ -57,7 +57,10 @@ export class ResultListComponent implements OnChanges {
 
     switch (tab) {
       case 'Song':
-        this.getDataforMedia('music');
+        this.getDataforMedia('music', 'song');
+        break;
+      case 'Album':
+        this.getDataforMedia('music', 'album');
         break;
       case 'Music Video':
         this.getDataforMedia('musicVideo');
