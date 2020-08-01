@@ -1,0 +1,36 @@
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { SearchService } from 'src/app/shared/services/search.service';
+import { HttpRequest, HttpResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-result-list',
+  templateUrl: './result-list.component.html',
+  styleUrls: ['./result-list.component.scss']
+})
+export class ResultListComponent implements OnChanges {
+  @Input() term;
+  result;
+
+  constructor(private search: SearchService) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+
+    const config = new HttpRequest(
+      'GET',
+      `https://itunes.appl.com/search?term=${changes.term.currentValue}`,
+      { responseType: 'json' }
+    );
+    console.log('term in result component', this.term);
+
+    if (changes.term.currentValue) {
+      this.search.searchTerm(config).subscribe((data) => {
+        if (data instanceof HttpResponse) {
+          if (data.body) {
+            this.result = data.body;
+            console.log(this.result)
+          }
+        }
+      });
+    }
+  }
+}
