@@ -1,25 +1,23 @@
 <h2>Showing results for "{{ term }}"</h2>
-<mat-tab-group>
-    <mat-tab *ngFor="let kind of kinds" [label]="kind | uppercase">
-        <mat-grid-list cols="12" rowHeight="30px">
-            <mat-grid-tile colspan="1"></mat-grid-tile> 
-            <mat-grid-tile class="header" colspan="3">TRACK</mat-grid-tile>   
-            <mat-grid-tile class="header" colspan="3">ALBUM/COLLECTION</mat-grid-tile>   
-            <mat-grid-tile class="header" colspan="4">ARTIST</mat-grid-tile>
-            <mat-grid-tile class="header" colspan="1">PRICE</mat-grid-tile>
-        </mat-grid-list>
-        <div *ngFor="let values of filterValuesByKind(kind); let index = index">
-           <!-- <mat-list>
-               <mat-list-item> <img [src]="values['artworkUrl60']" /> {{ values["trackName"] }} {{values["artistName"]}}</mat-list-item>
-           </mat-list> -->
-           
-           <mat-grid-list cols="12" rowHeight="100px"> 
-            <mat-grid-tile colspan="1"><img class="artwork" [src]="values['artworkUrl60']" /></mat-grid-tile>
-            <mat-grid-tile colspan="3">{{ values["trackName"] }}</mat-grid-tile>
-            <mat-grid-tile colspan="3">{{ values["collectionName"] }}</mat-grid-tile>
-            <mat-grid-tile colspan="4">{{ values["artistName"] }}</mat-grid-tile>
-            <mat-grid-tile colspan="1">{{ values["trackPrice"] | currency }}</mat-grid-tile>
-          </mat-grid-list>
-        </div>
-    </mat-tab>
+<mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="onTabChange($event)" animationDuration="0">
+    <mat-tab *ngFor="let kind of kinds" [label]="kind">
+        <ng-template matTabContent>
+            <mat-grid-list cols="12" rowHeight="30px">
+                <mat-grid-tile colspan="1"></mat-grid-tile> 
+                <mat-grid-tile class="header" colspan="3">NAME</mat-grid-tile>   
+                <mat-grid-tile class="header" colspan="3">ALBUM/COLLECTION</mat-grid-tile>   
+                <mat-grid-tile class="header" colspan="4">ARTIST</mat-grid-tile>
+                <mat-grid-tile class="header" colspan="1">PRICE</mat-grid-tile>
+            </mat-grid-list> 
+            <div *ngFor="let item of result">
+                <mat-grid-list cols="12" rowHeight="100px"> 
+                    <mat-grid-tile colspan="1"><img class="artwork" [src]="item['artworkUrl60']" /></mat-grid-tile>
+                    <mat-grid-tile colspan="3">{{ item["trackName"] }}</mat-grid-tile>
+                    <mat-grid-tile colspan="3">{{ item.collectionName }}</mat-grid-tile>
+                    <mat-grid-tile colspan="4">{{ item.artistName }}</mat-grid-tile>
+                    <mat-grid-tile colspan="1">{{ item.trackPrice | currency }}</mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </ng-template>
+    </mat-tab>    
 </mat-tab-group>
