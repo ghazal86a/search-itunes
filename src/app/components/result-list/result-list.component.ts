@@ -10,6 +10,8 @@ import { HttpRequest, HttpResponse } from '@angular/common/http';
 export class ResultListComponent implements OnChanges {
   @Input() term;
   result;
+  kinds;
+  songs;
 
   constructor(private search: SearchService) { }
 
@@ -17,7 +19,7 @@ export class ResultListComponent implements OnChanges {
 
     const config = new HttpRequest(
       'GET',
-      `https://itunes.appl.com/search?term=${changes.term.currentValue}`,
+      `https://itunes.apple.com/search?term=${changes.term.currentValue}&limit=1000`,
       { responseType: 'json' }
     );
     console.log('term in result component', this.term);
@@ -26,11 +28,30 @@ export class ResultListComponent implements OnChanges {
       this.search.searchTerm(config).subscribe((data) => {
         if (data instanceof HttpResponse) {
           if (data.body) {
-            this.result = data.body;
-            console.log(this.result)
+            this.result = data.body.results;
+            this.setData();
+            console.log("result", this.result)
           }
         }
       });
     }
+
+
+
+  }
+
+  setData() {
+    this.kinds =  [...new Set(this.result.map(item => item.kind))];
+    console.log('kinds:', this.kinds);
+    console.log(this.result)
+  }
+
+  filterValuesByKind(kind) {
+    console.log('here');
+    
+    const filteredByKind = this.result.filter(res => res.kind === kind);
+    // console.log(filteredByKind)
+    console.log([...new Set(filteredByKind.map(item => item))])
+    return [...new Set(filteredByKind.map(item => item))]
   }
 }
