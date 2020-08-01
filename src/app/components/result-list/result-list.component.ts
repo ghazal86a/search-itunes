@@ -31,7 +31,7 @@ export class ResultListComponent implements OnChanges {
   getDataforMedia(media) {
     const config = new HttpRequest(
       'GET',
-      `https://itunes.apple.com/search?term=${this.term}&media=${media}&limit=200`,
+      `https://itunes.apple.com/search?term=${this.term}&media=${media}&limit=50`,
       { responseType: 'json' }
     );
     if (this.term) {
