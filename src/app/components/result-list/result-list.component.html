@@ -1,23 +1,23 @@
 <h2>Showing results for "{{ term }}"</h2>
-<mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="onTabChange($event)" dynamicHeight animationDuration="0">
+<mat-tab-group [(selectedIndex)]="selectedIndex" (selectedTabChange)="onTabChange($event)" animationDuration="0ms">
     <mat-tab *ngFor="let kind of kinds" [label]="kind">
         <ng-template matTabContent>
             <mat-grid-list cols="12" rowHeight="30px">
-                <mat-grid-tile class="header" colspan="1"></mat-grid-tile> 
-                <mat-grid-tile class="header" colspan="3">NAME</mat-grid-tile>   
+                <!-- <mat-grid-tile class="header" colspan="1"></mat-grid-tile>  -->
+                <mat-grid-tile class="header" colspan="4">NAME</mat-grid-tile>   
                 <mat-grid-tile class="header" colspan="3">ALBUM/COLLECTION</mat-grid-tile>   
                 <mat-grid-tile class="header" colspan="4">ARTIST</mat-grid-tile>
                 <mat-grid-tile class="header" colspan="1">PRICE</mat-grid-tile>
             </mat-grid-list> 
-            <div *ngFor="let item of result">
-                <mat-grid-list cols="12" rowHeight="110px"> 
-                    <mat-grid-tile colspan="1"><img class="artwork" [src]="item.artworkUrl100" /></mat-grid-tile>
-                    <mat-grid-tile colspan="3">{{ item.trackName  || item.collectionName }}</mat-grid-tile>
-                    <mat-grid-tile colspan="3">{{ item.collectionName }}</mat-grid-tile>
-                    <mat-grid-tile colspan="4">{{ item.artistName }}</mat-grid-tile>
-                    <mat-grid-tile colspan="1">{{ (item.trackPrice | currency) || (item.collectionPrice | currency) }}</mat-grid-tile>
-                </mat-grid-list>
-            </div>
+
+            <mat-grid-list *ngFor="let item of result" cols="12" rowHeight="110px"> 
+                <mat-grid-tile colspan="1"><img class="artwork" [src]="item.artworkUrl100" /></mat-grid-tile>
+                <mat-grid-tile colspan="3">{{ item.trackName  || item.collectionName }}</mat-grid-tile>
+                <mat-grid-tile colspan="3">{{ item.collectionName }}</mat-grid-tile>
+                <mat-grid-tile colspan="4">{{ item.artistName }}</mat-grid-tile>
+                <mat-grid-tile colspan="1">{{ (item.trackPrice | currency) || (item.collectionPrice | currency) }}</mat-grid-tile>
+            </mat-grid-list>
+
         </ng-template>
     </mat-tab>    
 </mat-tab-group>

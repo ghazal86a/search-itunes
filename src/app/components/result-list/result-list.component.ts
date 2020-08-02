@@ -10,11 +10,10 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./result-list.component.scss']
 })
 export class ResultListComponent implements OnChanges {
-  @Input() term;
+  @Input() term: string;
   result;
-  songs;
   kinds = ['Song', 'Album', 'Music Video', 'Movie', 'TV Show', 'Podcast']
-  selectedIndex;
+  selectedIndex: number;
   constructor(private search: SearchService) { }
 
   // ngOnInit() {
@@ -50,7 +49,8 @@ export class ResultListComponent implements OnChanges {
   //   console.log('tests', [...new Set(this.result.map(item => item))] );
   //   return this.songs = this.result;
   // }
-	// movie, podcast, music, musicVideo, audiobook, shortFilm, tvShow, software, ebook, all
+
+// movie, podcast, music, musicVideo, audiobook, shortFilm, tvShow, software, ebook, all
   onTabChange(event: MatTabChangeEvent) {
     const tab = event.tab.textLabel;
     console.log(tab);
