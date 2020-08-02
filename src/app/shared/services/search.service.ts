@@ -14,7 +14,10 @@ export class SearchService {
     // const config = new HttpRequest('GET', `https://itunes.apple.com/search?term=taylor`,  { responseType: 'json' });
     // const params = new HttpParams()
     // .set('docType', 'reportJson');
-    return this.http.request(config).pipe(catchError(this.handleError));
+    return this.http.request(config).pipe(map(response => {
+      return response;
+    }),
+    catchError(this.handleError));
     // .pipe(
     //   map(response => {
     //     return response;

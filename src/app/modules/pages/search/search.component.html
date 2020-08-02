@@ -1,10 +1,10 @@
-<h1>Search</h1>
+<h2>Search iTunes for artists, albums, movies and much more...</h2>
 <div>
   <mat-card class="m-auto search-card">
     <mat-card-content>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="Search..." [formControl]="searchControl"/>
+        <input matInput placeholder="Search iTunes..." [formControl]="searchControl"/>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
@@ -14,5 +14,6 @@
       </button>
     </mat-card-actions>
   </mat-card>
-  <app-result-list *ngIf="term"  [term]="term"></app-result-list>
 </div>
+<mat-divider *ngIf="term"></mat-divider>
+<app-result-list *ngIf="term" [term]="term"></app-result-list>
